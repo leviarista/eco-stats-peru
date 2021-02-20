@@ -1,12 +1,21 @@
-# Getting Started with Create React App
+# <div align="center"> Eco Stats Perú </div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<sup>[english](#english) - [español](#español)</sup>
 
-## Available Scripts
+<a name="english"></a>
+## What is it?
 
-In the project directory, you can run:
+Eco Stats Perú is a website that aims to show data that raise awareness about how Peruvians are influencing our environment, how we impact its resources and how we influence climate change, based on open data.
 
-### `npm start`
+## Getting Started
+
+Clone the repository.
+
+Install Dependencies with `npm install`.
+
+After dependencies installed, you can run:
+
+`npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -14,57 +23,84 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
+`npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+
+App is ready!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## License
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This project is licensed under the MIT LiCense
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+MIT License
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Copyright (c) 2020 Leví Arista Sánchez
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-## Learn More
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<a name="español"></a>
 
-### Analyzing the Bundle Size
+## ¿Qué es?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Eco Stats Perú es un sitio web que tiene como objetivo mostrar datos que concienticen sobre cómo los peruanos estamos influyendo en nuestro entorno, cómo impactamos sus recursos y cómo influimos en el cambio climático, basado en datos abiertos.
 
-### Making a Progressive Web App
+## Empezando
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Clona el repositorio.
 
-### Advanced Configuration
+Instala las dependencias con `npm install`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Después de instalar las dependencias, se puede ejecutar:
+### `npm start`
 
-### Deployment
+Ejecuta la aplicación en modo de desarrollo.\
+Abre [http://localhost:3000](http://localhost:3000) para verlo en el navegador.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+La página se volverá a cargar si realiza modificaciones.\
+También verá errores de pelusa en la consola.
 
-### `npm run build` fails to minify
+### `npm ejecutar compilación`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Construye la aplicación para producción en la carpeta `build`.\
+Agrupa correctamente React en el modo de producción y optimiza la compilación para obtener el mejor rendimiento.
+
+La compilación es minimizada y los nombres de archivo incluyen los hash.\
+
+¡La aplicación está lista!
+
+Para obtener más información consulte la sección sobre [implementación](https://facebook.github.io/create-react-app/docs/deployment).
+
+## Licencia
+
+Copyright (c) 2020 Leví Arista Sánchez
+
+Por la presente se concede permiso, libre de cargos, a cualquier persona que obtenga una copia de este software y de los archivos de documentación asociados (el "Software"), a utilizar el Software sin restricción, incluyendo sin limitación los derechos a usar, copiar, modificar, fusionar, publicar, distribuir, sublicenciar, y/o vender copias del Software, y a permitir a las personas a las que se les proporcione el Software a hacer lo mismo, sujeto a las siguientes condiciones:
+
+El aviso de copyright anterior y este aviso de permiso se incluirán en todas las copias o partes sustanciales del Software.
+
+EL SOFTWARE SE PROPORCIONA "COMO ESTA", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITA, INCLUYENDO PERO NO LIMITADO A GARANTÍAS DE COMERCIALIZACIÓN, IDONEIDAD PARA UN PROPÓSITO PARTICULAR E INCUMPLIMIENTO. EN NINGÚN CASO LOS AUTORES O PROPIETARIOS DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑOS U OTRAS RESPONSABILIDADES, YA SEA EN UNA ACCIÓN DE CONTRATO, AGRAVIO O CUALQUIER OTRO MOTIVO, DERIVADAS DE, FUERA DE O EN CONEXIÓN CON EL SOFTWARE O SU USO U OTRO TIPO DE ACCIONES EN EL SOFTWARE.
