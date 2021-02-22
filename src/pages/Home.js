@@ -1,37 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/eco-stats-peru-nav-logo.svg';
-import peru from '../assets/peru.svg';
-import llama from '../assets/llama.svg';
+import ecoPeru from '../assets/flaticons/eco-peru.svg';
+import statsWhite from '../assets/stats-white.svg';
+import leaf from '../assets/leaf.svg';
 
 function Home() {
     return (
-        <>
-
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/"><img src={logo} alt="logo" /></Link>
-                    </li>
-                    <li>
-                        <Link to="/">HOME</Link>
-                    </li>
-                    <li>
-                        <Link to="/stats">STATS</Link>
-                    </li>
-                    <li>
-                        <Link to="/resources">RESOURCES</Link>
-                    </li>
-                    <li>
-                        <Link to="/about">ABOUT</Link>
-                    </li>
-                </ul>
-            </nav>
-
+        <div className="home-container">
 
             <header>
 
                 <h1>Eco Stats Perú</h1>
+                {/* <h2>Eco Stats Perú</h2>
+                <h3>Eco Stats Perú</h3>
+                <h4>Eco Stats Perú</h4>
+                <h5>Eco Stats Perú</h5> */}
 
                 <p>According to <a href="https://www.esa.org/about/what-does-ecology-have-to-do-with-me/" target="_blank" rel="noopeneer noreferrer">The Ecological Society of America</a>, <b>Ecology</b> is defined as:</p>
 
@@ -39,13 +22,31 @@ function Home() {
 
                 <p>While <b>Statistics</b> come to be <q>the science of collecting, displaying, and analysing data</q> according to <a href="https://www.oxfordreference.com/view/10.1093/acref/9780199541454.001.0001/acref-9780199541454-e-1566?rskey=nxhBLl&result=1979" target="_blank" rel="noopeneer noreferrer">Oxford Reference</a>.</p>
 
-                <p>Thus, this site aims to show data that raise awareness about how Peruvians are influencing our environment, how we impact its resources and how we influence climate change, based on open data.</p>
+                <p className="text-highlight">Thus, this site aims to show data that raise awareness about how Peruvians are influencing our environment, how we impact its resources and how we influence climate change, based on open data.</p>
 
-                <img src={peru} alt="peru" />
-                <img src={llama} alt="llama" />
+                <div className="header-buttons">
+                    <Link to="/stats" className="button button-main button-main-yellow">
+                        <img src={statsWhite} alt="STATS" /> See Statistics
+                </Link>
+                    <Link to="/resources" className="button button-secondary button-secondary-green">
+                        <img src={leaf} alt="RESOURCES" /> See Resources
+                </Link>
+                </div>
 
             </header>
-        </>
+
+            <section className="header-image">
+
+                {/* <img clas src={corn} alt="corn" className="corn" />
+                <img clas src={cockOfTheRocks} alt="cock-of-the-rocks" className="cock-of-the-rocks" />
+                <img src={peru} alt="peru" />
+                <img clas src={llama} alt="llama" className="llama" />
+                <img clas src={leaves} alt="leaves" className="leaves" /> */}
+                <img src={ecoPeru} alt="Peru" />
+
+            </section>
+
+        </div>
     )
 }
 

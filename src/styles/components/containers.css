@@ -1,0 +1,13 @@
+:root {
+    --margins: 0 10%;
+}
+
+.home-container {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 3fr 2fr;
+    column-gap: 40px;
+    min-height: calc(100vh - 70px - 50px);
+    margin: var(--margins);
+    /* margin-top: 70px; */
+}

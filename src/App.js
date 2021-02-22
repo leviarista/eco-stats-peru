@@ -1,16 +1,35 @@
 import {
   BrowserRouter as Router,
-  Link, Route, Switch
+  Route, Switch
 } from "react-router-dom";
-import './App.css';
+import './styles/base/normalize.css'
+import './styles/base/colors.css'
+import './styles/base/typography.css'
+import './styles/general/body.css'
+import './styles/general/box-sizing.css'
+import './styles/general/headings.css'
+import './styles/general/links.css'
+import './styles/general/text.css'
+import './styles/general/images.css'
+import './styles/components/nav.css'
+import './styles/components/footer.css'
+import './styles/components/containers.css'
+import './styles/components/buttons.css'
+import './styles/components/module-home.css'
+import './styles/utilities/text.css'
+import './styles/utilities/github-corner.css'
 import Home from "./pages/Home";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route path="/">
+          <Nav />
           <Home />
+          <Footer />
         </Route>
       </Switch>
     </Router>

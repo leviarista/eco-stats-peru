@@ -1,0 +1,27 @@
+:root {
+    /* ***************** Colors ***************** */
+    /* Basic */
+    --black: #000000;
+    --white: #FFFFFF;
+    --black-p-25: rgba(0, 0, 0, .25);
+    --black-p-50: rgba(0, 0, 0, .5);
+    /* Main */
+    --jungle-green: #2A9D8F;
+    --blue-dianne: #264653;
+    --eminence: #732C7D;
+    --rob-roy: #E9C46A;
+    /* Secondary */
+    --sandy-brown: #F4A261;
+    --wild-blue-yonder: #8A89C0;
+    --pink-swan: #BAA7B0;
+    --chatelle: #B2ABBF;
+    --dodger-blue: #1789FC;
+    /* Green variants */
+    --robins-egg-blue: #07D9C0;
+    --mountain-meadow: #0FB8A4;
+    --persian-green: #04B5A0;
+    /* ***************** Categories ***************** */
+    --text-color: var(--black);
+    --text-light-color: var(--white);
+    --headings-color: var(--blue-dianne);
+}

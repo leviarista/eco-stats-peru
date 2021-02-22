@@ -1,0 +1,4 @@
+.text-highlight {
+    color: var(--jungle-green) !important;
+    font-weight: 500;
+}

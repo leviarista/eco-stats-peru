@@ -1,0 +1,11 @@
+.home-container header .header-buttons {
+    display: flex;
+    column-gap: 15px;
+}
+
+.home-container .header-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
