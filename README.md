@@ -1,4 +1,4 @@
-# <div align="center"> Eco Stats Perú </div>
+# <div align="center"> Eco Stats Perú <br/> <br/> <img src="./src/assets/eco-stats-peru-nav-logo.svg"> </div>
 
 <sup>[english](#english) - [español](#español)</sup>
 
