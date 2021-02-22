@@ -16,22 +16,34 @@ import './styles/components/footer.css'
 import './styles/components/containers.css'
 import './styles/components/buttons.css'
 import './styles/components/module-home.css'
+import './styles/components/module-stats.css'
 import './styles/utilities/text.css'
 import './styles/utilities/github-corner.css'
 import Home from "./pages/Home";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import Stats from "./pages/Stats";
 
 function App() {
   return (
     <Router>
+
       <Switch>
+
+        <Route path="/stats">
+          <Nav />
+          <Stats />
+          <Footer />
+        </Route>
+
         <Route path="/">
           <Nav />
           <Home />
           <Footer />
         </Route>
+
       </Switch>
+
     </Router>
   );
 }

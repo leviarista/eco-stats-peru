@@ -38,7 +38,7 @@ const Nav = () => {
                         ABOUT
                     </Link>
                 </li>
-                <a href="https://github.com/leviarista/eco-stats-peru" target="_blank" rel="noopenner noreferrer" class="github-corner" aria-label="View source on GitHub">
+                <a href="https://github.com/leviarista/eco-stats-peru" target="_blank" rel="noopenner noreferrer" className="github-corner" aria-label="View source on GitHub">
                     <GitHubCorner />
                 </a>
             </ul>

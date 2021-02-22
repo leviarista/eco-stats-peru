@@ -1,0 +1,24 @@
+.stats-container header {
+    grid-area: 1 / 1 / 2 / 3;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.stats-container .title {
+    grid-area: 2 / 1 / 3 / 2;
+    margin-top: 50px;
+}
+
+.stats-container .title h4{
+    margin-top: 0;
+}
+
+.stats-container .description {
+    grid-area: 3 / 1 / 4 / 2;
+    margin-top: 25px;
+}
+
+.stats-container .graphic {
+    grid-area: 2 / 2 / 4 / 3;
+    margin-top: 50px;
+}

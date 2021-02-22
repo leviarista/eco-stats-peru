@@ -11,3 +11,13 @@
     margin: var(--margins);
     /* margin-top: 70px; */
 }
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto 1fr ;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    min-height: calc(100vh - 70px - 50px);
+    margin: var(--margins);
+}

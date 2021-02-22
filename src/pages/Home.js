@@ -11,10 +11,6 @@ function Home() {
             <header>
 
                 <h1>Eco Stats Perú</h1>
-                {/* <h2>Eco Stats Perú</h2>
-                <h3>Eco Stats Perú</h3>
-                <h4>Eco Stats Perú</h4>
-                <h5>Eco Stats Perú</h5> */}
 
                 <p>According to <a href="https://www.esa.org/about/what-does-ecology-have-to-do-with-me/" target="_blank" rel="noopeneer noreferrer">The Ecological Society of America</a>, <b>Ecology</b> is defined as:</p>
 
@@ -37,11 +33,6 @@ function Home() {
 
             <section className="header-image">
 
-                {/* <img clas src={corn} alt="corn" className="corn" />
-                <img clas src={cockOfTheRocks} alt="cock-of-the-rocks" className="cock-of-the-rocks" />
-                <img src={peru} alt="peru" />
-                <img clas src={llama} alt="llama" className="llama" />
-                <img clas src={leaves} alt="leaves" className="leaves" /> */}
                 <img src={ecoPeru} alt="Peru" />
 
             </section>
