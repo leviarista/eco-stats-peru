@@ -26,12 +26,12 @@ const Nav = () => {
                         STATS
                     </Link>
                 </li>
-                <li>
+                {/* <li>
                     <Link to="/resources">
                         <img src={leaf} alt="RESOURCES" />
                         RESOURCES
                     </Link>
-                </li>
+                </li> */}
                 <li>
                     <Link to="/about">
                         <img src={about} alt="ABOUT" />

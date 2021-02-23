@@ -105,7 +105,7 @@ async function TemperatureByGCM(setDescription, newOptions, setGraphicOptions, s
     setDescription({
         source: "The World Bank Group Organization",
         url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/902061-climate-data-api",
-        about: "This graph shows information about the temperature in Peru, in degrees Celsius, for periods of 20 years, according to different GCM (General Circulation Model).",
+        about: "This graph shows information about the temperature in Peru, in degrees Celsius, for periods of 20 years, according to different GCM (General Circulation Model), with past data and future projections.",
     });
 
     newOptions = {
@@ -243,7 +243,7 @@ async function PrecipitationByGCM(setDescription, newOptions, setGraphicOptions,
     setDescription({
         source: "The World Bank Group Organization",
         url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/902061-climate-data-api",
-        about: "This graph shows information about the Precipitation (rainfall and assumed water equivalent) in Peru, in millimeters, for periods of 20 years, according to different GCM (General Circulation Model).",
+        about: "This graph shows information about the Precipitation (rainfall and assumed water equivalent) in Peru, in millimeters, for periods of 20 years, according to different GCM (General Circulation Model), with past data and future projections.",
     });
 
     newOptions = {
