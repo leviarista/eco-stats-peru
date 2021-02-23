@@ -1,25 +1,30 @@
 .stats-container header {
     grid-area: 1 / 1 / 2 / 3;
+    align-self: flex-end;
     margin-top: 50px;
     text-align: center;
 }
 
-.stats-container .title {
-    grid-area: 2 / 1 / 3 / 2;
-    margin-top: 50px;
-}
-
-.stats-container .title h4 {
+.stats-container header h4 {
     margin-top: 0;
 }
 
+.stats-container header select {
+    width: fit-content;
+}
+
 .stats-container .description {
-    grid-area: 3 / 1 / 4 / 2;
-    margin-top: 25px;
+    grid-area: 2 / 2 / 3 / 3;
+    align-self: flex-start;
+    margin-top: 50px;
 }
 
 .stats-container .description p {
     display: flex;
+}
+
+.stats-container .description p:first-child {
+    margin-top: 0;
 }
 
 .stats-container .description b {
@@ -27,11 +32,34 @@
     min-width: 70px;
 }
 
-/* .stats-container .description span {
-    margin-left: 70px;
-} */
+.stats-container .description a {
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+.stats-container .default-message {
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--blue-dianne);
+    background-color: var(--gallery);
+    border-radius: 5px;
+}
 
 .stats-container .graphic {
-    grid-area: 2 / 2 / 4 / 3;
+    grid-area: 2 / 1 / 3 / 2;
+    align-self: flex-start;
     margin-top: 50px;
 }
