@@ -23,7 +23,7 @@ function Home() {
                 <div className="header-buttons">
                     <Link to="/stats" className="button button-main button-main-yellow">
                         <img src={statsWhite} alt="STATS" /> See Statistics
-                </Link>
+                    </Link>
                     <Link to="/resources" className="button button-secondary button-secondary-green">
                         <img src={leaf} alt="RESOURCES" /> See Resources
                 </Link>

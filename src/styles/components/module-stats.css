@@ -9,7 +9,7 @@
     margin-top: 50px;
 }
 
-.stats-container .title h4{
+.stats-container .title h4 {
     margin-top: 0;
 }
 
@@ -17,6 +17,19 @@
     grid-area: 3 / 1 / 4 / 2;
     margin-top: 25px;
 }
+
+.stats-container .description p {
+    display: flex;
+}
+
+.stats-container .description b {
+    display: inline-block;
+    min-width: 70px;
+}
+
+/* .stats-container .description span {
+    margin-left: 70px;
+} */
 
 .stats-container .graphic {
     grid-area: 2 / 2 / 4 / 3;
