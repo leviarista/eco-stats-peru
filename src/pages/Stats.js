@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
-import ReactECharts from 'echarts-for-react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import ReactECharts from 'echarts-for-react';
+import React, { useState } from 'react';
 
 const Stats = () => {
 

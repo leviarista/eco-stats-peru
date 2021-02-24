@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ecoPeru from '../assets/flaticons/eco-peru.svg';
 import statsWhite from '../assets/stats-white.svg';
-import leaf from '../assets/leaf.svg';
+// import leaf from '../assets/leaf.svg';
 
 function Home() {
     return (
