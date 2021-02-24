@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/eco-stats-peru-nav-logo.svg';
 import home from '../assets/home.svg';
 import stats from '../assets/stats.svg';
-import leaf from '../assets/leaf.svg';
+// import leaf from '../assets/leaf.svg';
 import about from '../assets/about.svg';
 import GitHubCorner from '../assets/GitHubCorner';
 
