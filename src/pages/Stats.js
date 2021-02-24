@@ -545,8 +545,8 @@ async function CO2EmissionsKTvsPopulation(setDescription, newOptions) {
     };
 
     let url = [
-        `http://api.worldbank.org/v2/country/per/indicator/EN.ATM.CO2E.KT?format=json`,
-        `http://api.worldbank.org/v2/country/per/indicator/SP.POP.TOTL?format=json`,
+        `https://api.worldbank.org/v2/country/per/indicator/EN.ATM.CO2E.KT?format=json`,
+        `https://api.worldbank.org/v2/country/per/indicator/SP.POP.TOTL?format=json`,
     ];
 
     const { data } = await axios.get(url[0]);
