@@ -22,3 +22,8 @@
     min-height: calc(100vh - 70px - 50px);
     margin: var(--margins);
 }
+
+.about-container {
+    min-height: calc(100vh - 70px - 50px);
+    margin: var(--margins);
+}

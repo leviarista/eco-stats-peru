@@ -45,6 +45,7 @@ const Stats = () => {
                     setPageState("");
                     break;
                 default:
+                    setPageState("initial")
                     break;
             }
 
