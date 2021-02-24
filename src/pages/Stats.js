@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
-import ReactECharts from 'echarts-for-react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import ReactECharts from 'echarts-for-react';
+import React, { useState } from 'react';
 
 const Stats = () => {
 
@@ -26,12 +25,22 @@ const Stats = () => {
 
             switch (type) {
                 case "TemperatureByGCM":
-                    newOptions = await TemperatureByGCM(setDescription, newOptions, setGraphicOptions, setPageState);
+                    newOptions = await TemperatureByGCM(setDescription, newOptions);
                     setGraphicOptions(newOptions);
                     setPageState("");
                     break;
                 case "PrecipitationByGCM":
-                    newOptions = await PrecipitationByGCM(setDescription, newOptions, setGraphicOptions, setPageState);
+                    newOptions = await PrecipitationByGCM(setDescription, newOptions);
+                    setGraphicOptions(newOptions);
+                    setPageState("");
+                    break;
+                case "CO2EmissionsKT":
+                    newOptions = await CO2EmissionsKT(setDescription, newOptions);
+                    setGraphicOptions(newOptions);
+                    setPageState("");
+                    break;
+                case "CO2EmissionsKTvsPopulation":
+                    newOptions = await CO2EmissionsKTvsPopulation(setDescription, newOptions);
                     setGraphicOptions(newOptions);
                     setPageState("");
                     break;
@@ -58,13 +67,14 @@ const Stats = () => {
                         <option > [select something] </option>
                         <option value="TemperatureByGCM">Temperature by GCM</option>
                         <option value="PrecipitationByGCM">Precipitation By GCM</option>
+                        <option value="CO2EmissionsKT">CO2 emissions (kt)</option>
+                        <option value="CO2EmissionsKTvsPopulation">CO2 emissions (kt) vs Population</option>
                     </select>
                     <b> in Perú </b>
                 </h4>
             </header>
 
             <section className="graphic">
-
                 {pageState !== "" ? (
                     <div className="default-message">
                         {pageState === "initial" && "Please select an option from the above"}
@@ -100,12 +110,12 @@ const Stats = () => {
 
 export default Stats
 
-async function TemperatureByGCM(setDescription, newOptions, setGraphicOptions, setPageState) {
+async function TemperatureByGCM(setDescription, newOptions) {
 
     setDescription({
         source: "The World Bank Group Organization",
         url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/902061-climate-data-api",
-        about: "This graph shows information about the temperature in Peru, in degrees Celsius, for periods of 20 years, according to different GCM (General Circulation Model).",
+        about: "This graph shows information about the temperature in Peru, in degrees Celsius, for periods of 20 years, according to different GCM (General Circulation Model), with past data and future projections.",
     });
 
     newOptions = {
@@ -170,15 +180,15 @@ async function TemperatureByGCM(setDescription, newOptions, setGraphicOptions, s
     };
 
     let url = [
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/1920/1939/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/1940/1959/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/1960/1979/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/1980/1999/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/2000/2019/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/2020/2039/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/2040/2059/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/2060/2079/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/2080/2099/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/1920/1939/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/1940/1959/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/1960/1979/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/1980/1999/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/2000/2019/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/2020/2039/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/2040/2059/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/2060/2079/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/tas/2080/2099/PER.json`,
     ];
 
     const response_data_0 = await axios.get(url[0]);
@@ -238,12 +248,12 @@ async function TemperatureByGCM(setDescription, newOptions, setGraphicOptions, s
     return newOptions;
 }
 
-async function PrecipitationByGCM(setDescription, newOptions, setGraphicOptions, setPageState) {
+async function PrecipitationByGCM(setDescription, newOptions) {
 
     setDescription({
         source: "The World Bank Group Organization",
         url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/902061-climate-data-api",
-        about: "This graph shows information about the Precipitation (rainfall and assumed water equivalent) in Peru, in millimeters, for periods of 20 years, according to different GCM (General Circulation Model).",
+        about: "This graph shows information about the Precipitation (rainfall and assumed water equivalent) in Peru, in millimeters, for periods of 20 years, according to different GCM (General Circulation Model), with past data and future projections.",
     });
 
     newOptions = {
@@ -308,15 +318,15 @@ async function PrecipitationByGCM(setDescription, newOptions, setGraphicOptions,
     };
 
     let url = [
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/1920/1939/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/1940/1959/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/1960/1979/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/1980/1999/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/2000/2019/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/2020/2039/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/2040/2059/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/2060/2079/PER.json`,
-        `http://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/2080/2099/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/1920/1939/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/1940/1959/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/1960/1979/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/1980/1999/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/2000/2019/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/2020/2039/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/2040/2059/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/2060/2079/PER.json`,
+        `https://climatedataapi.worldbank.org/climateweb/rest/v1/country/annualavg/pr/2080/2099/PER.json`,
     ];
 
     const response_data_0 = await axios.get(url[0]);
@@ -372,6 +382,203 @@ async function PrecipitationByGCM(setDescription, newOptions, setGraphicOptions,
         });
 
     }
+
+    return newOptions;
+}
+
+async function CO2EmissionsKT(setDescription, newOptions) {
+
+    setDescription({
+        source: "The World Bank Group Organization",
+        url: "https://data.worldbank.org/indicator/EN.ATM.CO2E.KT?locations=PE&view=chart",
+        about: "This graph shows information about CO2 emissions in Peru, in Kt, per year. Data from Carbon Dioxide Information Analysis Center, Environmental Sciences Division, Oak Ridge National Laboratory, Tennessee, United States.",
+    });
+
+    newOptions = {
+        title: {
+            text: "CO2 emissions (kt) [Perú]",
+            subtext: "In kt per year",
+            textStyle: {
+                color: "black",
+                fontSize: 14,
+            },
+            left: 0,
+            top: 0,
+        },
+        grid: { top: 75, right: 10, bottom: '30%', left: 20 },
+        legend: {
+            show: true,
+            bottom: 0,
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { readOnly: false },
+                magicType: { type: ['line', 'bar'] },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            show: true,
+            type: 'category',
+            data: ['1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979', '1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'],
+            offset: 10
+        },
+        yAxis: {
+            show: true,
+            type: 'value',
+            min: function (value) {
+                return value.min - 5;
+            },
+            max: function (value) {
+                return value.max + 5;
+            },
+            offset: 10,
+            name: 'kt',
+            axisLabel: {
+                formatter: value => (value / 1000).toFixed(0),
+                align: 'left'
+            },
+        },
+        series: [],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: "shadow"
+            }
+        },
+    };
+
+    let url = [
+        `https://api.worldbank.org/v2/country/per/indicator/EN.ATM.CO2E.KT?format=json`,
+    ];
+
+    const { data } = await axios.get(url[0]);
+
+    let data_tmp = [];
+
+    for (let i = (data[1].length - 1); i >= 0; i--) {
+        data_tmp.push(data[1][i].value?.toFixed(2));
+    }
+    newOptions.series.push({
+        name: 'CO2 emissions per year (kt)',
+        data: data_tmp,
+        type: 'line',
+    });
+
+    return newOptions;
+}
+
+async function CO2EmissionsKTvsPopulation(setDescription, newOptions) {
+
+    setDescription({
+        source: "The World Bank Group Organization",
+        url: "https://data.worldbank.org/indicator/EN.ATM.CO2E.KT?locations=PE&view=chart",
+        about: "This graph shows information about CO2 emissions in Peru, in Kt, per year. Data from Carbon Dioxide Information Analysis Center, Environmental Sciences Division, Oak Ridge National Laboratory, Tennessee, United States.",
+    });
+
+    newOptions = {
+        title: {
+            text: "CO2 emissions (kt) vs Population [Perú]",
+            // subtext: "CO2 emissions (kt) vs Population",
+            textStyle: {
+                color: "black",
+                fontSize: 14,
+            },
+            left: 0,
+            top: 0,
+        },
+        grid: { top: 75, right: 30, bottom: '30%', left: 30 },
+        legend: {
+            show: true,
+            bottom: 0,
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                // dataZoom: {
+                //     yAxisIndex: 'none'
+                // },
+                dataView: { readOnly: false },
+                magicType: { type: ['line', 'bar'] },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            show: true,
+            type: 'category',
+            data: ['1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979', '1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'],
+            offset: 10
+        },
+        yAxis: [
+            {
+                show: true,
+                type: 'value',
+                name: 'kt',
+                axisLabel: {
+                    formatter: value => (value / 1000).toFixed(0),
+                    align: 'left'
+                },
+                padding: 10
+            },
+            {
+                show: true,
+                type: 'value',
+                name: 'Million',
+                axisLabel: {
+                    formatter: value => (value / 1000000).toFixed(0),
+                }
+            },
+            {
+                show: true,
+            }
+        ],
+        series: [],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: "shadow"
+            }
+        },
+    };
+
+    let url = [
+        `http://api.worldbank.org/v2/country/per/indicator/EN.ATM.CO2E.KT?format=json`,
+        `http://api.worldbank.org/v2/country/per/indicator/SP.POP.TOTL?format=json`,
+    ];
+
+    const { data } = await axios.get(url[0]);
+
+    let data_tmp = [];
+
+    for (let i = (data[1].length - 1); i >= 0; i--) {
+        data_tmp.push(data[1][i].value?.toFixed(2));
+    }
+    newOptions.series.push({
+        name: 'CO2 emissions',
+        data: data_tmp,
+        type: 'line',
+        yAxisIndex: 0,
+    });
+
+    {
+        const { data } = await axios.get(url[1]);
+
+        data_tmp = [];
+
+        for (let i = (data[1].length - 1); i >= 0; i--) {
+            data_tmp.push(data[1][i].value?.toFixed(2));
+        }
+    }
+
+    newOptions.series.push({
+        name: 'Population',
+        data: data_tmp,
+        type: 'bar',
+        yAxisIndex: 1,
+    });
 
     return newOptions;
 }
