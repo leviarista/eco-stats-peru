@@ -20,6 +20,7 @@ import './styles/components/module-stats.css'
 import './styles/components/module-about.css'
 import './styles/utilities/text.css'
 import './styles/utilities/github-corner.css'
+import './styles/utilities/visibility.css'
 import Home from "./pages/Home";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
