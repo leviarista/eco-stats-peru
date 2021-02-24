@@ -45,6 +45,7 @@ const Stats = () => {
                     setPageState("");
                     break;
                 default:
+                    setPageState("initial")
                     break;
             }
 
@@ -65,8 +66,8 @@ const Stats = () => {
                     <b>Statistics about </b>
                     <select name="type" onChange={(e) => handleClick(e.target.value)}>
                         <option > [select something] </option>
-                        <option value="TemperatureByGCM">Temperature by GCM</option>
-                        <option value="PrecipitationByGCM">Precipitation By GCM</option>
+                        {/* <option value="TemperatureByGCM">Temperature by GCM</option>
+                        <option value="PrecipitationByGCM">Precipitation By GCM</option> */}
                         <option value="CO2EmissionsKT">CO2 emissions (kt)</option>
                         <option value="CO2EmissionsKTvsPopulation">CO2 emissions (kt) vs Population</option>
                     </select>
