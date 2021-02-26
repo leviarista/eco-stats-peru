@@ -54,6 +54,11 @@ const Stats = () => {
                     setGraphicOptions(newOptions);
                     setPageState("");
                     break;
+                case "ThreatenedSpecies":
+                    newOptions = await ThreatenedSpecies(setDescription, newOptions);
+                    setGraphicOptions(newOptions);
+                    setPageState("");
+                    break;
                 default:
                     setPageState("initial")
                     break;
@@ -61,9 +66,7 @@ const Stats = () => {
 
 
         } catch (error) {
-
             setPageState("error")
-
             console.log(error)
         }
     }
@@ -82,6 +85,7 @@ const Stats = () => {
                         <option value="CO2EmissionsKTvsPopulation">CO2 emissions (kt) vs Population</option>
                         <option value="ForestAreaPercentage">Forest area (% of land area)</option>
                         <option value="ForestAreaKm">Forest area (sq. km)</option>
+                        <option value="ThreatenedSpecies">Threatened species</option>
                     </select>
                     <b> in Perú </b>
                 </h4>
@@ -776,6 +780,148 @@ async function ForestAreaKm(setDescription, newOptions) {
             color: '#6DCE83'
         },
     });
+
+
+    return newOptions;
+}
+
+async function ThreatenedSpecies(setDescription, newOptions) {
+
+    setDescription({
+        source: "The World Bank Group Organization",
+        url: "",
+        about: "",
+    });
+
+    newOptions = {
+        title: {
+            text: "Threatened Species in 2018 [Perú]",
+            subtext: "Plant, Fish, Mammal and Bird Species",
+            textStyle: {
+                color: "black",
+                fontSize: 14,
+            },
+            left: 0,
+            top: 0,
+        },
+        // grid: { top: 0, right: 0, bottom: 0, left: 40 },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { readOnly: false },
+                magicType: { type: ['line', 'bar'] },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            show: true,
+            type: 'category',
+            data: ['Plants', 'Fish', 'Mammals', 'Birds'],
+            axisTick: { show: false },
+            axisLine: { show: false },
+        },
+        yAxis: [
+            {
+                // splitLine: {show: false},
+                // axisTick: {show: false},
+                // axisLine: {show: false},
+                // axisLabel: {show: false},
+                max: 500
+            },
+        ],
+        series: [],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: "shadow"
+            },
+            formatter: function (params) {
+                return params[0].name + ': ' + params[0].value;
+            }
+        },
+        color: ['#F0A70A'],
+    };
+
+    let url = [
+        `https://api.worldbank.org/v2/country/per/indicator/EN.HPT.THRD.NO?format=json`,
+        `https://api.worldbank.org/v2/country/per/indicator/EN.FSH.THRD.NO?format=json`,
+        `https://api.worldbank.org/v2/country/per/indicator/EN.MAM.THRD.NO?format=json`,
+        `https://api.worldbank.org/v2/country/per/indicator/EN.BIR.THRD.NO?format=json`,
+    ];
+
+    let data_tmp = [];
+
+    const { data } = await axios.get(url[0]);
+    for (let i = (data[1].length - 1); i >= 0; i--) {
+        if (data[1][i].value !== null)
+            data_tmp.push(data[1][i].value);
+    }
+    {
+        const { data } = await axios.get(url[1]);
+        for (let i = (data[1].length - 1); i >= 0; i--) {
+            if (data[1][i].value !== null)
+                data_tmp.push(data[1][i].value);
+        }
+    }
+    {
+        const { data } = await axios.get(url[2]);
+        for (let i = (data[1].length - 1); i >= 0; i--) {
+            if (data[1][i].value !== null)
+                data_tmp.push(data[1][i].value);
+        }
+    }
+    {
+        const { data } = await axios.get(url[3]);
+        for (let i = (data[1].length - 1); i >= 0; i--) {
+            if (data[1][i].value !== null)
+                data_tmp.push(data[1][i].value);
+        }
+    }
+
+    newOptions.series.push({
+        name: 'Threatened Species in 2018',
+        data: data_tmp,
+        type: 'pictorialBar',
+        symbol: 'path://M10,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
+        itemStyle: {
+            opacity: 0.5
+        },
+        emphasis: {
+            itemStyle: {
+                opacity: 1
+            }
+        },
+        z: 10
+    });
+
+    newOptions.series.push(
+        {
+            name: 'glyph',
+            type: 'pictorialBar',
+            barGap: '-100%',
+            symbolPosition: 'end',
+            symbolSize: 50,
+            symbolOffset: [0, '-120%'],
+            data: [{
+                value: data_tmp[0],
+                symbol: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAO5SURBVHgBzVjdcdpAEN49foLth6AKIlcQ3AGuwLxiTwaoIE4FNhXEqQA8GczkKaYCSAWmA5MKRDJjAtjcZu8AWRL6ASHN+JsxlhC3993u3rd7AkgZ4+7Bo9UtlCEmspAirLvDCv8zQQoTYkJAikABteWFLEJMpEaQw2oCQUXfEL49giChbF/jGySIAmv2JEjvISZSIajDC1iGBJD1My4w81k+L3rGp+kA4kCFN6Gl+5kxiegSs6I/7h4+/uketqzvu+mYM7wKUsJviIlNgtPC0HFnEkDdQfbKahWjE56w5LpHGEJMbBA0GuMxy4OfQUX2GgvzB6uTKwUZ1AtAcC9ilh9AUgQVCPBXyBgTRe7h74+jmu/T7NRFHgHaetFJEgRc3EMEpKT2NjVWgryFPeBPUOUhQeSqEcXPjZwUXHvXz5X3qjGVwDbnAxUSIvgGUSAoisL8a8DTEXuvCXsCgx4oz2Bh9sA/MSECNM0balF6zMG8z3E1CeUJe28EeyJQTrUXgU63CTW8m9W1MeVN9mpS5BQw6gdKUhBz/Q3pcIAX0uPPSwTxyArQMKpPbV9bLPgilzkjkhU7MsoBgga0ED2Y5+69Oz6SoDbM5Q8B+yHhHtGLbChBX4fbNV6HftZiAa9ABNTGkgQ943xyv7rfHky0zkSv/IiSZIJCtIrVCXrGRC3OH+xZFNTeiaBj0rIqZwLxI4fX1KUNda6aXoLqTBKHHH+OOPSjWAQ3CDvy1ElQ1W5VHqMt0IhIqDwe8PFg6NxgiRyajIvnodXJfGHhbrmmBaoHZhF7iTfUrapaYWKe2qlu2aKhCX7EkIvALH+zTY3O+hrOcE6tDzpI3N28DJSXYAeIrKiRlxshE8tdL4lNtjGzJGjrk+SQrPXOjgxfYI6TPTciiU3jwl/jvODwlh1GRgSyYZzvXpeF2mVav7iLDhNj0G0WtVTjujxzBMMZXvbiLWvjSdymQfBKmxzGyPbKRRRFaNOqwrsi1zSqk/o+/aAdg5VXykFC7DOSO57Xmmt1WMRZqPViuWKsyF3DnrCbBTUR/7WL1X/HKl+UNoWO5KaAF9Pa/B5LPP40CXIugk68EoWIfg7LVueo7vxmSW6/JhWiCK6hvMATHod5E4Wsucck02atEXm8VhNqbyoN8wV7cZujaExsff43zp8uA0OefzIhJez0gkKHXD6fbIY8X4KUsPMbFFXy9FEgapcnhFiveLx5iRl5JoT4AClg737Q22V7G9Y3A+vu6IbrNEHCSO4FJi1iv8EKw38o/7EXShPjGAAAAABJRU5ErkJggg==',
+                symbolSize: [40, 40]
+            }, {
+                value: data_tmp[1],
+                symbol: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAH/SURBVHgB7ZbBVdtAEIb/GewXyResCiIqiNNB6IAcbQ7gCuxUEFwBcQWYAza3PCqIUwFKBVEHWg5gHEc7mbUBE+KE8KRH/PL2O612V7uz/47+EeDxeDwej+dfQiiJ7Khe5+Bbx7U3m1c9lEQFJcHh7L0Iuq5tTsOGTF60o7YxKAijBLJhbUdEuncdQjsUTD+iBDgbBTEKQiSdFb1vLk7DQ3f1KACZUU00EQcWthc1r1M8keyk2iCunj86kZCotKnk9AUkBrkk+B4kj6WBBhh+cqfVdqrX1I9akw/3J+j4V5XI6MJ9IAdvbLyCSF1P1YBFrBsXUmgZOJ+B8/FDkSgbhl0iOrzrERiwjAmc2lwuiNApHMSTkLFYPo52LweLAEfBvgZzhPUjFdjtuQ+aYS17XpX+mrSSnQT7axfcTZrpN3HGxLT3cFCE+mq6b1XiLQFvz1947hgtPusHM6ioqTZuC97cbugXu0k1BVYtoXMoRtmBqTiYVg9u7YcX16tyakJqDW2v8kJVs798cArLu3pzsrVQ2LZ1/LiQym5NoOfWi1qX3fveWBE7ex3tzpI/LqBe5YJSg00wXZrrzWEGWjE29eR7ywPpXHBMbF/q5i6/458DIqP2lVgRZ9pJ1Loe/37rEnDlTGvvubtyp0TUvDrAuuFKnvtpgMfj8Xg8nv+KH8gv82t7SknoAAAAAElFTkSuQmCC',
+                symbolSize: [40, 40]
+            }, {
+                value: data_tmp[2],
+                symbol: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALRSURBVHgB7VddXtpAEJ/ZikR8MDlB0xPIDYo3sI/ah8oJkBMgJyg9AfKA8GZ7ArmB3KC5QcKDErDsdHZDQkJAQcHy+zX/h3zMTmb/u/OVBciQIUOG/xu4ipLbNE0A3wzfrbLvwAYw6B5U5DDfssqeB+sSVKSEMa4QUInVSmkNcvjisAUPQThyQgMA6cwsCw8mcunEIofHRNjI70vbf4RPICae9fWpP6+3lyLWMWwEbAKMS/TsGtDmiw2sxItgPnraOesCloEC4zAaiT7ugcmvJwBPKb2EhUGnUOPd+L14x7YEBDO4iaZ7UzhND0PgTjRGt+9KbAmY0NXR2WM99g7gdQv37KUi7AqQftIwX1bJg4Pu4XciuoTdg0MgTwSRPIXdhE5WMc3G3QRiUZCEOvwLEHCNpN4zYw7fzSCLO4UrfqjBO4Hnupb+fjXsIKr26gHf8GKyCwHic1SF3ZuDS/Z5LaxLWwHvDCFWrbOH61U/SbQJt50rIubutkWS+015HXIKiU6ieiG3ra3EJPfdH+uSUxBr6qvaVFaT6QDXwfwyNLnzh1fV2qSLgx+Fu2WlZ5GL3DYnmFieYNwEqtb5sAGvhEiynSenf6nCQW+hixC3l1SQcjHa4ZNaOcdjGWaC/mITFCfopOuqsOENmCMY7JiqU8ot1pkfxRnvrrPIACJ9jL4GrMN4v5GITZQ2bIwgot4lCbI1mxR+BTKyXrDlqBBQhTZeCXhhx7ApguyeQfAgzJiwF0wER0ts2FpN7d4UOikIwpCwgzPNBgiGQEHfVNHWL5LPHVqIRbd9eJFSpiBJBMrjpFh+icLjYNSM2tnbCE4TgfAURe5ek/xj9Pn80NKN+wNV3M4cSQy+4Vp3qdplKOb4dcLw0PZQ3EaLXgOpExGvtISIFST0OBbraqKp3OabrRMnrq/clx9daKK+0Y8fISPXGr765+yFtjJkyJAhw+r4CyTENS0D74OkAAAAAElFTkSuQmCC',
+                symbolSize: [40, 40]
+            }, {
+                value: data_tmp[3],
+                symbol: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMeSURBVHgBzVhdVtpQEJ65gkT6ElYgrqDuoLAC8VH7oKwAXYG4AnUF6oOlLz3HHZgdNK6g6QoSH4qB02Y6c0sgAoH8UfM9QDL3cvky/xOAkgOhpHAfqvuoKlcKSgb31jRfBvULVNXvROq5VBp0H4xTRHXFdjX51jGPhnsVeGeIxqA2YmLQY49rTsQOQdCWi3cj6N4aTWWoE6LxGSCa0TUiOG8c+45c/1eCQgpq2GFtHbC2WiTCOSdj2WXjePgY3qfyQW2Oir8Pvw270fW8RPtr45ZS+Iko6ERMuBSa3NGwH5UlIugOjCYC3spTR354F/jb5/NEhZQyxj0CakX3r8MycoK1Jtb5iNTTJLKiB56iMWryZTuUvXzd6VEw7vOamcY4ceQEK/Og/CFidYHcDNhi7bb0Xs5dRHgdvzeGHNF5HDn9D8uEYRZPZiKy2PwWa6EPaUDgEQaHjSPfWrVtSjAMAKxiDwg7cgAgeescOxMQbA4aIees3RomSiZlTgg5gIEd/bE7qPf5SS6gCIjmAO/Ztp5SsKtFSCbLTZ0PWU5+7TAMPnQf6n1Qwd26p/EGO09pojITd8IbGFX70cxQEdZJVM1p4xI3RpAsOZ+rhzW/ok2cJOkKCtViaGr887gqUNJVEk4pCJwTM5DhT4dLnB0QPbOv2+uiNxNBgfvlwzUi9VZskU6kK99yk8R9ViF9s8BODMboIC798BNbZkLtJEHqjlr8lR26G7dOCB0oEJlafvEfqZ9LFzmfheWvCGSeSaR+cmN5v2yN01ExSR1yENQYbZ+xxuzFhVkTkRe5CGp/5ILPdnUWFmmrEF8sZKqbNLRPbyIbORG/bu8lLQJxKGQullzHkd1+o0kp/gaPBzlR2OA+Ixk9XJ1AThT6ZkFXDYTpRFZETiz81Qc3ojezGzBfvxm7kAOFE9RNwL/mQMP3t9qQA5t5eaTAml4j5AqUjRCkAH+G14jBR8iBzWiQaJb7EMunQZ5xrGkJlOZBBrOsR8EGoLsdwq7MGlogU2NGbOwNa+PzL1vGR93xILSgrJA67Q3qP6DMkGkwjx+WGn8BRsNVBuX4uakAAAAASUVORK5CYII=',
+                symbolSize: [40, 40]
+            },]
+        }
+    )
 
 
     return newOptions;
