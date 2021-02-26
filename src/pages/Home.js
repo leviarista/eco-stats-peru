@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ecoPeru from '../assets/flaticons/eco-peru.svg';
 import statsWhite from '../assets/stats-white.svg';
-// import leaf from '../assets/leaf.svg';
+import leafWhite from '../assets/leaf-white.svg';
 
 function Home() {
     return (
@@ -18,16 +18,16 @@ function Home() {
 
                 <p className="hidden-xs">While <b>Statistics</b> come to be <q>the science of collecting, displaying, and analysing data</q> according to <a href="https://www.oxfordreference.com/view/10.1093/acref/9780199541454.001.0001/acref-9780199541454-e-1566?rskey=nxhBLl&result=1979" target="_blank" rel="noopeneer noreferrer">Oxford Reference</a>.</p>
 
-                <p className="text-highlight hidden-xs">Thus, this website aims to show data that raise awareness about how Peruvians are influencing our environment, how we impact its resources and how we influence climate change, based on open data.</p>
-                <p>Eco Stats Perú is a website aims to show data that raise awareness about how Peruvians are influencing our environment, how we impact its resources and how we influence climate change, based on open data.</p>
+                <p className="text-highlight hidden-xs">Thus, this website aims to list solutions and show data that raise awareness about how Peruvians are influencing our environment, how we impact its resources and how we influence climate change, based on open data.</p>
+                <p className="hidden-sm">Eco Stats Perú is a website aims to list solutions and show data that raise awareness about how Peruvians are influencing our environment, how we impact its resources and how we influence climate change, based on open data.</p>
 
                 <div className="header-buttons">
                     <Link to="/stats" className="button button-main button-main-yellow">
                         <img src={statsWhite} alt="STATS" /> See Statistics
                     </Link>
-                    {/* <Link to="/resources" className="button button-secondary button-secondary-green">
-                        <img src={leaf} alt="RESOURCES" /> See Resources
-                    </Link> */}
+                    <Link to="/solutions" className="button button-main button-main-green">
+                        <img src={leafWhite} alt="RESOURCES" /> See Solutions
+                    </Link>
                 </div>
 
             </header>

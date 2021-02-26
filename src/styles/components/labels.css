@@ -1,0 +1,56 @@
+.label {
+    border-radius: 5px;
+    padding: 0 15px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.label.label-organization {
+    background-color: var(--havelock-blue);
+    color: var(--white);
+}
+
+.label.label-event {
+    background-color: var(--rob-roy);
+    color: var(--white);
+}
+
+.label.label-initiative {
+    background-color: var(--sandy-brown);
+    color: var(--white);
+}
+
+.label.label-campaign {
+    background-color: var(--stiletto);
+    color: var(--white);
+}
+
+.label.label-community {
+    background-color: var(--eminence);
+    color: var(--white);
+}
+
+.label.label-environment {
+    background-color: var(--potters-clay);
+    color: var(--white);
+}
+
+.label.label-recycle {
+    background-color: var(--persian-green);
+    color: var(--white);
+}
+
+.label.label-trees {
+    background-color: var(--emerald);
+    color: var(--white);
+}
+
+.label.label-water {
+    background-color: var(--dodger-blue);
+    color: var(--white);
+}
+
+.label.label-climate-change {
+    background-color: var(--azure-radiance);
+    color: var(--white);
+}

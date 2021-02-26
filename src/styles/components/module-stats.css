@@ -81,6 +81,10 @@
         margin-top: 25px;
         text-align: center;
     }
+    .stats-container header select {
+        width: 100%;
+        padding-left: 0;
+    }
     .stats-container .graphic {
         grid-area: 2 / 1 / 3 / 2;
         align-self: flex-start;

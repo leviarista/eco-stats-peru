@@ -1,0 +1,38 @@
+.solutions-container header {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.solutions-container section:not(:last-child) {
+    border-bottom: solid 2px #ccc;
+}
+
+.solutions-container h4 {
+    margin-bottom: 5px;
+}
+
+.solutions-container .labels-container {
+    display: flex;
+    column-gap: 5px;
+    margin-left: 25px;
+}
+
+.solutions-container ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.solutions-container ul li::before {
+    content: "🌎";
+    float: left;
+    margin-right: 0.25rem;
+}
+
+.solutions-container ul li p {
+    margin-left: 25px;
+}
+
+.solutions-container ul li i {
+    font-weight: 500;
+    color: var(--wild-blue-yonder)
+}

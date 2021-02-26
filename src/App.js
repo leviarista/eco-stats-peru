@@ -15,8 +15,10 @@ import './styles/components/nav.css'
 import './styles/components/footer.css'
 import './styles/components/containers.css'
 import './styles/components/buttons.css'
+import './styles/components/labels.css'
 import './styles/components/module-home.css'
 import './styles/components/module-stats.css'
+import './styles/components/module-solutions.css'
 import './styles/components/module-about.css'
 import './styles/utilities/text.css'
 import './styles/utilities/github-corner.css'
@@ -26,6 +28,7 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Stats from "./pages/Stats";
 import About from "./pages/About";
+import Solutions from "./pages/Solutions";
 
 function App() {
   return (
@@ -33,6 +36,7 @@ function App() {
       <Nav />
       <Switch>
         <Route path="/stats"><Stats /></Route>
+        <Route path="/solutions"><Solutions /></Route>
         <Route path="/about"><About /></Route>
         <Route path="/"><Home /></Route>
       </Switch>
