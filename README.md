@@ -1,11 +1,11 @@
-# <div align="center"> Eco Stats Perú <br/> <br/> <img src="./src/assets/eco-stats-peru-nav-logo.svg"> </div>
+# <div align="center"> Eco Stats Peru <br/> <br/> <img src="./src/assets/eco-stats-peru-nav-logo.svg"> </div>
 
-<sup>[english](#english) - [español](#español)</sup>
+<sup>[english](#english) - [spanish](#español)</sup>
 
 <a name="english"></a>
 ## What is it?
 
-Eco Stats Perú is a website that aims to show data that raise awareness about how Peruvians are influencing our environment, how we impact its resources and how we influence climate change, based on open data.
+Eco Stats Peru is a website aims to list solutions and show data that raise awareness about how Peruvians are influencing our environment, how we impact its resources and how we influence climate change, based on open data.
 
 ## Getting Started
 
