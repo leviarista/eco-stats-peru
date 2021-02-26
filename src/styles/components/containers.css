@@ -25,6 +25,11 @@
     margin: var(--margins);
 }
 
+.solutions-container {
+    margin: var(--margins);
+    margin-bottom: 50px;
+}
+
 .about-container {
     min-height: calc(100vh - 70px - 50px - 40px - 50px);
     margin: var(--margins);
@@ -46,6 +51,12 @@
         grid-template-rows: auto auto auto;
         grid-column-gap: 40px;
         grid-row-gap: 0px;
+        margin: var(--margins-mobile);
+    }
+    .solutions-container {
+        margin: var(--margins-mobile);
+    }
+    .about-container {
         margin: var(--margins-mobile);
     }
 }

@@ -9,7 +9,7 @@ const Stats = () => {
     const [description, setDescription] = useState({
         source: "",
         url: "",
-        about: ".",
+        about: "",
     })
 
     // Graphic Data
@@ -44,6 +44,16 @@ const Stats = () => {
                     setGraphicOptions(newOptions);
                     setPageState("");
                     break;
+                case "ForestAreaPercentage":
+                    newOptions = await ForestAreaPercentage(setDescription, newOptions);
+                    setGraphicOptions(newOptions);
+                    setPageState("");
+                    break;
+                case "ForestAreaKm":
+                    newOptions = await ForestAreaKm(setDescription, newOptions);
+                    setGraphicOptions(newOptions);
+                    setPageState("");
+                    break;
                 default:
                     setPageState("initial")
                     break;
@@ -70,6 +80,8 @@ const Stats = () => {
                         <option value="PrecipitationByGCM">Precipitation By GCM</option> */}
                         <option value="CO2EmissionsKT">CO2 emissions (kt)</option>
                         <option value="CO2EmissionsKTvsPopulation">CO2 emissions (kt) vs Population</option>
+                        <option value="ForestAreaPercentage">Forest area (% of land area)</option>
+                        <option value="ForestAreaKm">Forest area (sq. km)</option>
                     </select>
                     <b> in Perú </b>
                 </h4>
@@ -580,6 +592,191 @@ async function CO2EmissionsKTvsPopulation(setDescription, newOptions) {
         type: 'bar',
         yAxisIndex: 1,
     });
+
+    return newOptions;
+}
+
+async function ForestAreaPercentage(setDescription, newOptions) {
+
+    setDescription({
+        source: "The World Bank Group Organization",
+        url: "https://data.worldbank.org/indicator/AG.LND.FRST.ZS?view=chart",
+        about: "",
+    });
+
+    newOptions = {
+        title: {
+            text: "Forest area [Perú]",
+            subtext: "(% of land area)",
+            textStyle: {
+                color: "black",
+                fontSize: 14,
+            },
+            left: 0,
+            top: 0,
+        },
+        grid: { top: 75, right: 0, bottom: '30%', left: 15 },
+        legend: {
+            show: true,
+            bottom: 0,
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                // dataZoom: {
+                //     yAxisIndex: 'none'
+                // },
+                dataView: { readOnly: false },
+                magicType: { type: ['line', 'bar'] },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            show: true,
+            type: 'category',
+            data: ['1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016'],
+            offset: 10
+        },
+        yAxis: [
+            {
+                show: true,
+                type: 'value',
+                name: '%',
+                axisLabel: {
+                    formatter: value => (value).toFixed(0),
+                    align: 'left'
+                },
+                padding: 10
+            },
+            {
+                show: true,
+            }
+        ],
+        series: [],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: "shadow"
+            }
+        },
+    };
+
+    let url = [
+        `https://api.worldbank.org/v2/country/per/indicator/AG.LND.FRST.ZS?format=json`,
+    ];
+
+    const { data } = await axios.get(url[0]);
+
+    let data_tmp = [];
+
+    for (let i = (data[1].length - 1); i >= 0; i--) {
+        if (data[1][i].value !== null)
+            data_tmp.push(data[1][i].value?.toFixed(2));
+    }
+    newOptions.series.push({
+        name: 'Forest area',
+        data: data_tmp,
+        type: 'line',
+        areaStyle: {
+            color: '#2A9D8F'
+        }
+    });
+
+
+    return newOptions;
+}
+
+async function ForestAreaKm(setDescription, newOptions) {
+
+    setDescription({
+        source: "The World Bank Group Organization",
+        url: "https://data.worldbank.org/indicator/AG.LND.FRST.K2?locations=PE&view=chart",
+        about: "",
+    });
+
+    newOptions = {
+        title: {
+            text: "Forest area [Perú]",
+            subtext: "(sq. km)",
+            textStyle: {
+                color: "black",
+                fontSize: 14,
+            },
+            left: 0,
+            top: 0,
+        },
+        grid: { top: 75, right: 0, bottom: '30%', left: 40 },
+        legend: {
+            show: true,
+            bottom: 0,
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { readOnly: false },
+                magicType: { type: ['line', 'bar'] },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            show: true,
+            type: 'category',
+            data: ['1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016'],
+            offset: 10
+        },
+        yAxis: [
+            {
+                show: true,
+                type: 'value',
+                name: 'Thousands',
+                axisLabel: {
+                    formatter: value => (value / 1000).toFixed(0),
+                    align: 'left'
+                },
+                min: function (value) {
+                    return value.min - 10;
+                },
+                max: function (value) {
+                    return value.max + 10;
+                },
+                offset: 10
+            },
+            {
+                show: true,
+            }
+        ],
+        series: [],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: "shadow"
+            }
+        },
+    };
+
+    let url = [
+        `https://api.worldbank.org/v2/country/per/indicator/AG.LND.FRST.K2?format=json`,
+    ];
+
+    const { data } = await axios.get(url[0]);
+
+    let data_tmp = [];
+
+    for (let i = (data[1].length - 1); i >= 0; i--) {
+        if (data[1][i].value !== null)
+            data_tmp.push(data[1][i].value?.toFixed(2));
+    }
+    newOptions.series.push({
+        name: 'Forest area',
+        data: data_tmp,
+        type: 'line',
+        areaStyle: {
+            color: '#6DCE83'
+        },
+    });
+
 
     return newOptions;
 }

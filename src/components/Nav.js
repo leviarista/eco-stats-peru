@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/eco-stats-peru-nav-logo.svg';
 import home from '../assets/home.svg';
 import stats from '../assets/stats.svg';
-// import leaf from '../assets/leaf.svg';
+import leaf from '../assets/leaf.svg';
 import about from '../assets/about.svg';
 import GitHubCorner from '../assets/GitHubCorner';
 import githubLogo from '../assets/github-logo.svg';
@@ -40,12 +40,12 @@ const Nav = () => {
                         STATS
                     </Link>
                 </li>
-                {/* <li>
-                    <Link to="/resources">
-                        <img src={leaf} alt="RESOURCES" />
-                        RESOURCES
+                <li>
+                    <Link to="/solutions" onClick={hideNav}>
+                        <img src={leaf} alt="SOLUTIONS" />
+                        SOLUTIONS
                     </Link>
-                </li> */}
+                </li>
                 <li>
                     <Link to="/about" onClick={hideNav}>
                         <img src={about} alt="ABOUT" />
