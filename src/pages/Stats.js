@@ -44,6 +44,11 @@ const Stats = () => {
                     setGraphicOptions(newOptions);
                     setPageState("");
                     break;
+                case "ThreatenedSpecies":
+                    newOptions = await ThreatenedSpecies(setDescription, newOptions);
+                    setGraphicOptions(newOptions);
+                    setPageState("");
+                    break;
                 case "ForestAreaPercentage":
                     newOptions = await ForestAreaPercentage(setDescription, newOptions);
                     setGraphicOptions(newOptions);
@@ -54,8 +59,28 @@ const Stats = () => {
                     setGraphicOptions(newOptions);
                     setPageState("");
                     break;
-                case "ThreatenedSpecies":
-                    newOptions = await ThreatenedSpecies(setDescription, newOptions);
+                case "TerrestrialAndMarineProtectedAreas":
+                    newOptions = await TerrestrialAndMarineProtectedAreas(setDescription, newOptions);
+                    setGraphicOptions(newOptions);
+                    setPageState("");
+                    break;
+                case "AveragePrecipitationInDepth":
+                    newOptions = await AveragePrecipitationInDepth(setDescription, newOptions);
+                    setGraphicOptions(newOptions);
+                    setPageState("");
+                    break;
+                case "EnergyUseKgOilPerCapita":
+                    newOptions = await EnergyUseKgOilPerCapita(setDescription, newOptions);
+                    setGraphicOptions(newOptions);
+                    setPageState("");
+                    break;
+                case "AirPollutionAnnualExposure":
+                    newOptions = await AirPollutionAnnualExposure(setDescription, newOptions);
+                    setGraphicOptions(newOptions);
+                    setPageState("");
+                    break;
+                case "AirPollutionExposedPopulation":
+                    newOptions = await AirPollutionExposedPopulation(setDescription, newOptions);
                     setGraphicOptions(newOptions);
                     setPageState("");
                     break;
@@ -83,9 +108,14 @@ const Stats = () => {
                         <option value="PrecipitationByGCM">Precipitation By GCM</option> */}
                         <option value="CO2EmissionsKT">CO2 emissions (kt)</option>
                         <option value="CO2EmissionsKTvsPopulation">CO2 emissions (kt) vs Population</option>
+                        <option value="ThreatenedSpecies">Threatened species</option>
                         <option value="ForestAreaPercentage">Forest area (% of land area)</option>
                         <option value="ForestAreaKm">Forest area (sq. km)</option>
-                        <option value="ThreatenedSpecies">Threatened species</option>
+                        <option value="TerrestrialAndMarineProtectedAreas">Terrestrial and marine protected areas (%)</option>
+                        <option value="AveragePrecipitationInDepth">Average precipitation in depth</option>
+                        <option value="EnergyUseKgOilPerCapita">Energy use (kg of oil equivalent per capita)</option>
+                        <option value="AirPollutionAnnualExposure">PM2.5 air pollution, annual exposure)</option>
+                        <option value="AirPollutionExposedPopulation">PM2.5 air pollution, population exposed</option>
                     </select>
                     <b> in Perú </b>
                 </h4>
@@ -600,197 +630,12 @@ async function CO2EmissionsKTvsPopulation(setDescription, newOptions) {
     return newOptions;
 }
 
-async function ForestAreaPercentage(setDescription, newOptions) {
-
-    setDescription({
-        source: "The World Bank Group Organization",
-        url: "https://data.worldbank.org/indicator/AG.LND.FRST.ZS?view=chart",
-        about: "",
-    });
-
-    newOptions = {
-        title: {
-            text: "Forest area [Perú]",
-            subtext: "(% of land area)",
-            textStyle: {
-                color: "black",
-                fontSize: 14,
-            },
-            left: 0,
-            top: 0,
-        },
-        grid: { top: 75, right: 0, bottom: '30%', left: 15 },
-        legend: {
-            show: true,
-            bottom: 0,
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                // dataZoom: {
-                //     yAxisIndex: 'none'
-                // },
-                dataView: { readOnly: false },
-                magicType: { type: ['line', 'bar'] },
-                restore: {},
-                saveAsImage: {}
-            }
-        },
-        xAxis: {
-            show: true,
-            type: 'category',
-            data: ['1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016'],
-            offset: 10
-        },
-        yAxis: [
-            {
-                show: true,
-                type: 'value',
-                name: '%',
-                axisLabel: {
-                    formatter: value => (value).toFixed(0),
-                    align: 'left'
-                },
-                padding: 10
-            },
-            {
-                show: true,
-            }
-        ],
-        series: [],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: "shadow"
-            }
-        },
-    };
-
-    let url = [
-        `https://api.worldbank.org/v2/country/per/indicator/AG.LND.FRST.ZS?format=json`,
-    ];
-
-    const { data } = await axios.get(url[0]);
-
-    let data_tmp = [];
-
-    for (let i = (data[1].length - 1); i >= 0; i--) {
-        if (data[1][i].value !== null)
-            data_tmp.push(data[1][i].value?.toFixed(2));
-    }
-    newOptions.series.push({
-        name: 'Forest area',
-        data: data_tmp,
-        type: 'line',
-        areaStyle: {
-            color: '#2A9D8F'
-        }
-    });
-
-
-    return newOptions;
-}
-
-async function ForestAreaKm(setDescription, newOptions) {
-
-    setDescription({
-        source: "The World Bank Group Organization",
-        url: "https://data.worldbank.org/indicator/AG.LND.FRST.K2?locations=PE&view=chart",
-        about: "",
-    });
-
-    newOptions = {
-        title: {
-            text: "Forest area [Perú]",
-            subtext: "(sq. km)",
-            textStyle: {
-                color: "black",
-                fontSize: 14,
-            },
-            left: 0,
-            top: 0,
-        },
-        grid: { top: 75, right: 0, bottom: '30%', left: 40 },
-        legend: {
-            show: true,
-            bottom: 0,
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                dataView: { readOnly: false },
-                magicType: { type: ['line', 'bar'] },
-                restore: {},
-                saveAsImage: {}
-            }
-        },
-        xAxis: {
-            show: true,
-            type: 'category',
-            data: ['1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016'],
-            offset: 10
-        },
-        yAxis: [
-            {
-                show: true,
-                type: 'value',
-                name: 'Thousands',
-                axisLabel: {
-                    formatter: value => (value / 1000).toFixed(0),
-                    align: 'left'
-                },
-                min: function (value) {
-                    return value.min - 10;
-                },
-                max: function (value) {
-                    return value.max + 10;
-                },
-                offset: 10
-            },
-            {
-                show: true,
-            }
-        ],
-        series: [],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: "shadow"
-            }
-        },
-    };
-
-    let url = [
-        `https://api.worldbank.org/v2/country/per/indicator/AG.LND.FRST.K2?format=json`,
-    ];
-
-    const { data } = await axios.get(url[0]);
-
-    let data_tmp = [];
-
-    for (let i = (data[1].length - 1); i >= 0; i--) {
-        if (data[1][i].value !== null)
-            data_tmp.push(data[1][i].value?.toFixed(2));
-    }
-    newOptions.series.push({
-        name: 'Forest area',
-        data: data_tmp,
-        type: 'line',
-        areaStyle: {
-            color: '#6DCE83'
-        },
-    });
-
-
-    return newOptions;
-}
-
 async function ThreatenedSpecies(setDescription, newOptions) {
 
     setDescription({
         source: "The World Bank Group Organization",
-        url: "",
-        about: "",
+        url: "https://data.worldbank.org/indicator/EN.HPT.THRD.NO?locations=PE&view=chart",
+        about: "This graph shows information about threatened Species of plants, fish, mammals and birds in Peru, in 2018. Data from United Nations Environmental Program and the World Conservation Monitoring Centre, and International Union for Conservation of Nature, Red List of Threatened Species; Froese, R. and Pauly, D. ( eds ). 2008. FishBase database, fishbase.org; United Nations Environmental Program and the World Conservation Monitoring Centre, and International Union for Conservation of Nature, Red List of Threatened Species; and United Nations Environmental Program and the World Conservation Monitoring Centre, and International Union for Conservation of Nature, Red List of Threatened Species.",
     });
 
     newOptions = {
@@ -923,6 +768,638 @@ async function ThreatenedSpecies(setDescription, newOptions) {
         }
     )
 
+
+    return newOptions;
+}
+
+async function ForestAreaPercentage(setDescription, newOptions) {
+
+    setDescription({
+        source: "The World Bank Group Organization",
+        url: "https://data.worldbank.org/indicator/AG.LND.FRST.ZS?view=chart",
+        about: "This graph shows information about Forest area in Peru, in percentages of land area, per year. Data from Food and Agriculture Organization, electronic files and web site.",
+    });
+
+    newOptions = {
+        title: {
+            text: "Forest area [Perú]",
+            subtext: "(% of land area)",
+            textStyle: {
+                color: "black",
+                fontSize: 14,
+            },
+            left: 0,
+            top: 0,
+        },
+        grid: { top: 75, right: 0, bottom: '30%', left: 15 },
+        legend: {
+            show: true,
+            bottom: 0,
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                // dataZoom: {
+                //     yAxisIndex: 'none'
+                // },
+                dataView: { readOnly: false },
+                magicType: { type: ['line', 'bar'] },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            show: true,
+            type: 'category',
+            data: ['1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016'],
+            offset: 10
+        },
+        yAxis: [
+            {
+                show: true,
+                type: 'value',
+                name: '%',
+                axisLabel: {
+                    formatter: value => (value).toFixed(0),
+                    align: 'left'
+                },
+                padding: 10
+            },
+            {
+                show: true,
+            }
+        ],
+        series: [],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: "shadow"
+            }
+        },
+        color: '#2A9D8F'
+    };
+
+    let url = [
+        `https://api.worldbank.org/v2/country/per/indicator/AG.LND.FRST.ZS?format=json`,
+    ];
+
+    const { data } = await axios.get(url[0]);
+
+    let data_tmp = [];
+
+    for (let i = (data[1].length - 1); i >= 0; i--) {
+        if (data[1][i].value !== null)
+            data_tmp.push(data[1][i].value?.toFixed(2));
+    }
+    newOptions.series.push({
+        name: 'Forest area',
+        data: data_tmp,
+        type: 'line',
+        areaStyle: {
+            color: '#2A9D8F'
+        }
+    });
+
+
+    return newOptions;
+}
+
+async function ForestAreaKm(setDescription, newOptions) {
+
+    setDescription({
+        source: "The World Bank Group Organization",
+        url: "https://data.worldbank.org/indicator/AG.LND.FRST.K2?locations=PE&view=chart",
+        about: "This graph shows information about Forest area in Peru, in sq. km, per year. Data from Food and Agriculture Organization, electronic files and web site.",
+    });
+
+    newOptions = {
+        title: {
+            text: "Forest area [Perú]",
+            subtext: "(sq. km)",
+            textStyle: {
+                color: "black",
+                fontSize: 14,
+            },
+            left: 0,
+            top: 0,
+        },
+        grid: { top: 75, right: 0, bottom: '30%', left: 40 },
+        legend: {
+            show: true,
+            bottom: 0,
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { readOnly: false },
+                magicType: { type: ['line', 'bar'] },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            show: true,
+            type: 'category',
+            data: ['1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016'],
+            offset: 10
+        },
+        yAxis: [
+            {
+                show: true,
+                type: 'value',
+                name: 'Thousands',
+                axisLabel: {
+                    formatter: value => (value / 1000).toFixed(0),
+                    align: 'left'
+                },
+                min: function (value) {
+                    return value.min - 10;
+                },
+                max: function (value) {
+                    return value.max + 10;
+                },
+                offset: 10
+            },
+            {
+                show: true,
+            }
+        ],
+        series: [],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: "shadow"
+            }
+        },
+        color: '#6DCE83',
+    };
+
+    let url = [
+        `https://api.worldbank.org/v2/country/per/indicator/AG.LND.FRST.K2?format=json`,
+    ];
+
+    const { data } = await axios.get(url[0]);
+
+    let data_tmp = [];
+
+    for (let i = (data[1].length - 1); i >= 0; i--) {
+        if (data[1][i].value !== null)
+            data_tmp.push(data[1][i].value?.toFixed(2));
+    }
+    newOptions.series.push({
+        name: 'Forest area',
+        data: data_tmp,
+        type: 'line',
+        areaStyle: {
+            color: '#6DCE83'
+        },
+    });
+
+
+    return newOptions;
+}
+
+async function TerrestrialAndMarineProtectedAreas(setDescription, newOptions) {
+
+    setDescription({
+        source: "The World Bank Group Organization",
+        url: "https://data.worldbank.org/indicator/AG.LND.FRST.K2?locations=PE&view=chart",
+        about: "This graph shows information about terrestrial and marine protected areas in Peru, in % of total territorial area , per year. Data from World Database on Protected Areas ( WDPA ) where the compilation and management is carried out by United Nations Environment World Conservation Monitoring Centre ( UNEP-WCMC ) in collaboration with governments, non-governmental organizations, academia and industry. The data is available online through the Protected Planet website ( protectedplanet.net ).",
+    });
+
+    newOptions = {
+        title: {
+            text: "Terrestrial and marine protected areas [Perú]",
+            subtext: "% of total territorial area",
+            textStyle: {
+                color: "black",
+                fontSize: 14,
+            },
+            left: 0,
+            top: 0,
+        },
+        grid: { top: 75, right: 0, bottom: '20%', left: 25 },
+        legend: {
+            show: true,
+            bottom: 0,
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { readOnly: false },
+                magicType: { type: ['line', 'bar'] },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            show: true,
+            type: 'category',
+            data: ['2016', '2017', '2018'],
+            offset: 10
+        },
+        yAxis: [
+            {
+                show: true,
+                type: 'value',
+                name: '%',
+                axisLabel: {
+                    formatter: value => (value).toFixed(0),
+                    align: 'left'
+                },
+                min: function (value) {
+                    return value.min - 10;
+                },
+                max: function (value) {
+                    return value.max + 10;
+                },
+                offset: 10
+            }
+        ],
+        series: [],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: "shadow"
+            }
+        },
+        color: '#5189DE',
+    };
+
+    let url = [
+        `https://api.worldbank.org/v2/country/per/indicator/ER.PTD.TOTL.ZS?format=json`,
+    ];
+
+    const { data } = await axios.get(url[0]);
+
+    let data_tmp = [];
+
+    for (let i = (data[1].length - 1); i >= 0; i--) {
+        if (data[1][i].value !== null)
+            data_tmp.push(data[1][i].value?.toFixed(2));
+    }
+    newOptions.series.push({
+        name: '% protected areas',
+        data: data_tmp,
+        type: 'bar',
+    });
+
+
+    return newOptions;
+}
+
+async function AveragePrecipitationInDepth(setDescription, newOptions) {
+
+    setDescription({
+        source: "The World Bank Group Organization",
+        url: "https://data.worldbank.org/indicator/AG.LND.PRCP.MM?locations=PE&view=chart",
+        about: "This graph shows information about Average precipitation in depth in mm per year, in Peru. Data from Food and Agriculture Organization, electronic files and web site.",
+    });
+
+    newOptions = {
+        title: {
+            text: "Average precipitation in depth [Perú]",
+            subtext: "mm per year",
+            textStyle: {
+                color: "black",
+                fontSize: 14,
+            },
+            left: 0,
+            top: 0,
+        },
+        grid: { top: 75, right: 0, bottom: '20%', left: 25 },
+        legend: {
+            show: true,
+            bottom: 0,
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { readOnly: false },
+                magicType: { type: ['line', 'bar'] },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            show: true,
+            type: 'category',
+            data: ['1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979', '1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'],
+            offset: 10
+        },
+        yAxis: [
+            {
+                show: true,
+                type: 'value',
+                name: 'mm',
+                axisLabel: {
+                    formatter: value => (value).toFixed(0),
+                    align: 'left',
+                },
+                min: function (value) {
+                    return value.min - 10;
+                },
+                max: function (value) {
+                    return value.max + 10;
+                },
+                offset: 10
+            }
+        ],
+        series: [],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: "shadow"
+            }
+        },
+        color: '#732C7D',
+    };
+
+    let url = [
+        `https://api.worldbank.org/v2/country/per/indicator/AG.LND.PRCP.MM?format=json`,
+    ];
+
+    const { data } = await axios.get(url[0]);
+
+    let data_tmp = [];
+
+    for (let i = (data[1].length - 1); i >= 0; i--) {
+        // if (data[1][i].value !== null)
+        data_tmp.push(data[1][i].value?.toFixed(2));
+    }
+    newOptions.series.push({
+        name: 'Average precipitation in depth',
+        data: data_tmp,
+        type: 'line',
+    });
+
+
+    return newOptions;
+}
+
+async function EnergyUseKgOilPerCapita(setDescription, newOptions) {
+
+    setDescription({
+        source: "The World Bank Group Organization",
+        url: "https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE?locations=PE&view=chart",
+        about: "This graph shows information about energy use (kg of oil equivalent per capita) in Peru. Data from IEA Statistics © OECD/IEA 2014 ( iea.org/stats/index.asp ), subject to iea.org/t&c/termsandconditions",
+    });
+
+    newOptions = {
+        title: {
+            text: "Energy use [Perú]",
+            subtext: "kg of oil equivalent per capita",
+            textStyle: {
+                color: "black",
+                fontSize: 14,
+            },
+            left: 0,
+            top: 0,
+        },
+        grid: { top: 75, right: 0, bottom: '20%', left: 25 },
+        legend: {
+            show: true,
+            bottom: 0,
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { readOnly: false },
+                magicType: { type: ['line', 'bar'] },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            show: true,
+            type: 'category',
+            data: ['1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979', '1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'],
+            offset: 10
+        },
+        yAxis: [
+            {
+                show: true,
+                type: 'value',
+                name: 'kg',
+                axisLabel: {
+                    formatter: value => (value).toFixed(0),
+                    align: 'left',
+                },
+                min: function (value) {
+                    return value.min - 10;
+                },
+                max: function (value) {
+                    return value.max + 10;
+                },
+                offset: 10
+            }
+        ],
+        series: [],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: "shadow"
+            }
+        },
+        color: '#264653',
+    };
+
+    let url = [
+        `https://api.worldbank.org/v2/country/per/indicator/EG.USE.PCAP.KG.OE?format=json`,
+    ];
+
+    const { data } = await axios.get(url[0]);
+
+    let data_tmp = [];
+
+    for (let i = (data[1].length - 1); i >= 0; i--) {
+        // if (data[1][i].value !== null)
+        data_tmp.push(data[1][i].value?.toFixed(2));
+    }
+    newOptions.series.push({
+        name: 'Energy use (kg of oil equivalent per capita)',
+        data: data_tmp,
+        type: 'line',
+        areaStyle: {
+            color: '#E9C46A'
+        }
+    });
+
+    return newOptions;
+}
+
+async function AirPollutionAnnualExposure(setDescription, newOptions) {
+
+    setDescription({
+        source: "The World Bank Group Organization",
+        url: "https://data.worldbank.org/indicator/EN.ATM.PM25.MC.M3?locations=PE&view=chart",
+        about: "This graph shows information about mean annual exposure (micrograms per cubic meter) of PM2.5 Air Pollution in Peru. Data from Brauer, M. et al. 2017, for the Global Burden of Disease Study 2017.",
+    });
+
+    newOptions = {
+        title: {
+            text: "PM2.5 Air Pollution [Perú]",
+            subtext: "Mean annual exposure (micrograms per cubic meter)",
+            textStyle: {
+                color: "black",
+                fontSize: 14,
+            },
+            left: 0,
+            top: 0,
+        },
+        grid: { top: 75, right: 0, bottom: '20%', left: 25 },
+        legend: {
+            show: true,
+            bottom: 0,
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { readOnly: false },
+                magicType: { type: ['line', 'bar'] },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            show: true,
+            type: 'category',
+            data: ['1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979', '1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'],
+            offset: 10
+        },
+        yAxis: [
+            {
+                show: true,
+                type: 'value',
+                // name: '',
+                axisLabel: {
+                    formatter: value => (value).toFixed(0),
+                    align: 'left',
+                },
+                min: function (value) {
+                    return value.min - 10;
+                },
+                max: function (value) {
+                    return value.max + 10;
+                },
+                offset: 10
+            }
+        ],
+        series: [],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: "shadow"
+            }
+        },
+        color: '#90323D',
+    };
+
+    let url = [
+        `https://api.worldbank.org/v2/country/per/indicator/EN.ATM.PM25.MC.M3?format=json`,
+    ];
+
+    const { data } = await axios.get(url[0]);
+
+    let data_tmp = [];
+
+    for (let i = (data[1].length - 1); i >= 0; i--) {
+        // if (data[1][i].value !== null)
+        data_tmp.push(data[1][i].value?.toFixed(2));
+    }
+    newOptions.series.push({
+        name: 'PM2.5 air pollution, mean annual exposure (micrograms per cubic meter)',
+        data: data_tmp,
+        type: 'line'
+    });
+
+    return newOptions;
+}
+
+async function AirPollutionExposedPopulation(setDescription, newOptions) {
+
+    setDescription({
+        source: "The World Bank Group Organization",
+        url: "https://data.worldbank.org/indicator/EN.ATM.PM25.MC.ZS?locations=PE&view=chart",
+        about: "This graph shows information about Population exposed to levels of PM2.5 Air Pollution exceeding WHO guideline value (% of total) in Peru. Data from Brauer, M. et al. 2017, for the Global Burden of Disease Study 2017.",
+    });
+
+    newOptions = {
+        title: {
+            text: "PM2.5 Air Pollution [Perú]",
+            subtext: "Population exposed to levels exceeding WHO guideline value (% of total)",
+            textStyle: {
+                color: "black",
+                fontSize: 14,
+            },
+            left: 0,
+            top: 0,
+        },
+        grid: { top: 75, right: 0, bottom: '20%', left: 10 },
+        legend: {
+            show: true,
+            bottom: 0,
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { readOnly: false },
+                magicType: { type: ['line', 'bar'] },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            show: true,
+            type: 'category',
+            data: ['1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979', '1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'],
+            offset: 10
+        },
+        yAxis: [
+            {
+                show: true,
+                type: 'value',
+                // name: '---',
+                axisLabel: {
+                    formatter: value => (value).toFixed(0),
+                    align: 'left',
+                },
+                min: function (value) {
+                    return value.min - 10;
+                },
+                max: function (value) {
+                    return value.max + 10;
+                },
+                offset: 10
+            }
+        ],
+        series: [],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: "shadow"
+            }
+        },
+        color: '#8F5C38',
+    };
+
+    let url = [
+        `https://api.worldbank.org/v2/country/per/indicator/EN.ATM.PM25.MC.ZS?format=json`,
+    ];
+
+    const { data } = await axios.get(url[0]);
+
+    let data_tmp = [];
+
+    for (let i = (data[1].length - 1); i >= 0; i--) {
+        // if (data[1][i].value !== null)
+        data_tmp.push(data[1][i].value?.toFixed(2));
+    }
+    newOptions.series.push({
+        name: 'PM2.5 air pollution, population exposed to levels exceeding WHO guideline value (% of total)',
+        data: data_tmp,
+        type: 'line'
+    });
 
     return newOptions;
 }
