@@ -299,6 +299,26 @@ const Solutions = () => {
                 </section>
 
                 <section>
+                    <ul>
+                        <li>
+                            <h4>Taricaya Ecoreserve</h4>
+                            <div className="labels-container">
+                                <span className="label label-organization">Organization</span>
+                                <span className="label label-community">Community</span>
+                                <span className="label label-environment">Environment</span>
+                            </div>
+                            <p>
+                                Taricaya Ecoreserve is an eco tourism reserve & wildlife rescue center in the Peru Amazon. Conserving & monitoring flora & fauna for over 18 years.
+                                <br />
+                                They are a community of people living in the middle of the rainforest as a family and as a team working together in the different projects to make a positive impact towards rainforest conservation.
+                            </p>
+                            <p><i>Take a look at what they are doing and get involved in their projects.</i></p>
+                            <p><a href="https://www.taricayaecoreserve.org/" target="_blank" rel="noopenner noreferrer">Go to site</a></p>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
                     <h3>Do you have another idea?</h3>
                     <p>If you want to share any other initiative, send us an email at <a href="mailto:levi.arista@gmail.com">levi.arista@gmail.com</a></p>
                     <p>

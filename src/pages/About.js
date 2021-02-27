@@ -34,6 +34,10 @@ const About = () => {
                 </p>
             </section>
 
+            <hr/>
+
+            <section>🛈 <small>Icons in home section were made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></small></section>
+
         </div>
     )
 }
