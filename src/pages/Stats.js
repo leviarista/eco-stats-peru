@@ -1502,7 +1502,7 @@ async function TotalNaturalResourcesRents(setDescription, newOptions) {
         data_tmp.push(data[1][i].value?.toFixed(2));
     }
     newOptions.series.push({
-        name: 'PM2.5 air pollution, population exposed to levels exceeding WHO guideline value (% of total)',
+        name: '"% of GDP',
         data: data_tmp,
         type: 'bar'
     });
