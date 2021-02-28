@@ -9,6 +9,7 @@ const Stats = () => {
     const [description, setDescription] = useState({
         source: "",
         url: "",
+        apiDoc: "",
         about: "",
     })
 
@@ -84,6 +85,11 @@ const Stats = () => {
                     setGraphicOptions(newOptions);
                     setPageState("");
                     break;
+                case "TotalNaturalResourcesRents":
+                    newOptions = await TotalNaturalResourcesRents(setDescription, newOptions);
+                    setGraphicOptions(newOptions);
+                    setPageState("");
+                    break;
                 default:
                     setPageState("initial")
                     break;
@@ -114,8 +120,9 @@ const Stats = () => {
                         <option value="TerrestrialAndMarineProtectedAreas">Terrestrial and marine protected areas (%)</option>
                         <option value="AveragePrecipitationInDepth">Average precipitation in depth</option>
                         <option value="EnergyUseKgOilPerCapita">Energy use (kg of oil equivalent per capita)</option>
-                        <option value="AirPollutionAnnualExposure">PM2.5 air pollution, annual exposure)</option>
+                        <option value="AirPollutionAnnualExposure">PM2.5 air pollution, annual exposure</option>
                         <option value="AirPollutionExposedPopulation">PM2.5 air pollution, population exposed</option>
+                        <option value="TotalNaturalResourcesRents">Total natural resources rents (% of GDP)</option>
                     </select>
                     <b> in Perú </b>
                 </h4>
@@ -142,6 +149,10 @@ const Stats = () => {
                     <span>{description.source}</span>
                 </p>
                 <p>
+                    <b>API Doc:</b>
+                    <a href={description.apiDoc} target="_blank" rel="noopenner noreferrer">{description.apiDoc && "Go to API Documentation"}</a>
+                </p>
+                <p>
                     <b>URL:</b>
                     <a href={description.url} target="_blank" rel="noopenner noreferrer">{description.url && "Go to website"}</a>
                 </p>
@@ -161,6 +172,7 @@ async function TemperatureByGCM(setDescription, newOptions) {
 
     setDescription({
         source: "The World Bank Group Organization",
+        apiDoc: "https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information",
         url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/902061-climate-data-api",
         about: "This graph shows information about the temperature in Peru, in degrees Celsius, for periods of 20 years, according to different GCM (General Circulation Model), with past data and future projections.",
     });
@@ -299,6 +311,7 @@ async function PrecipitationByGCM(setDescription, newOptions) {
 
     setDescription({
         source: "The World Bank Group Organization",
+        apiDoc: "https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information",
         url: "https://datahelpdesk.worldbank.org/knowledgebase/articles/902061-climate-data-api",
         about: "This graph shows information about the Precipitation (rainfall and assumed water equivalent) in Peru, in millimeters, for periods of 20 years, according to different GCM (General Circulation Model), with past data and future projections.",
     });
@@ -437,6 +450,7 @@ async function CO2EmissionsKT(setDescription, newOptions) {
 
     setDescription({
         source: "The World Bank Group Organization",
+        apiDoc: "https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information",
         url: "https://data.worldbank.org/indicator/EN.ATM.CO2E.KT?locations=PE&view=chart",
         about: "This graph shows information about CO2 emissions in Peru, in Kt, per year. Data from Carbon Dioxide Information Analysis Center, Environmental Sciences Division, Oak Ridge National Laboratory, Tennessee, United States.",
     });
@@ -521,6 +535,7 @@ async function CO2EmissionsKTvsPopulation(setDescription, newOptions) {
 
     setDescription({
         source: "The World Bank Group Organization",
+        apiDoc: "https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information",
         url: "https://data.worldbank.org/indicator/EN.ATM.CO2E.KT?locations=PE&view=chart",
         about: "This graph shows information about CO2 emissions in Peru, in Kt, per year. Data from Carbon Dioxide Information Analysis Center, Environmental Sciences Division, Oak Ridge National Laboratory, Tennessee, United States.",
     });
@@ -634,6 +649,7 @@ async function ThreatenedSpecies(setDescription, newOptions) {
 
     setDescription({
         source: "The World Bank Group Organization",
+        apiDoc: "https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information",
         url: "https://data.worldbank.org/indicator/EN.HPT.THRD.NO?locations=PE&view=chart",
         about: "This graph shows information about threatened Species of plants, fish, mammals and birds in Peru, in 2018. Data from United Nations Environmental Program and the World Conservation Monitoring Centre, and International Union for Conservation of Nature, Red List of Threatened Species; Froese, R. and Pauly, D. ( eds ). 2008. FishBase database, fishbase.org; United Nations Environmental Program and the World Conservation Monitoring Centre, and International Union for Conservation of Nature, Red List of Threatened Species; and United Nations Environmental Program and the World Conservation Monitoring Centre, and International Union for Conservation of Nature, Red List of Threatened Species.",
     });
@@ -776,6 +792,7 @@ async function ForestAreaPercentage(setDescription, newOptions) {
 
     setDescription({
         source: "The World Bank Group Organization",
+        apiDoc: "https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information",
         url: "https://data.worldbank.org/indicator/AG.LND.FRST.ZS?view=chart",
         about: "This graph shows information about Forest area in Peru, in percentages of land area, per year. Data from Food and Agriculture Organization, electronic files and web site.",
     });
@@ -868,6 +885,7 @@ async function ForestAreaKm(setDescription, newOptions) {
 
     setDescription({
         source: "The World Bank Group Organization",
+        apiDoc: "https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information",
         url: "https://data.worldbank.org/indicator/AG.LND.FRST.K2?locations=PE&view=chart",
         about: "This graph shows information about Forest area in Peru, in sq. km, per year. Data from Food and Agriculture Organization, electronic files and web site.",
     });
@@ -963,6 +981,7 @@ async function TerrestrialAndMarineProtectedAreas(setDescription, newOptions) {
 
     setDescription({
         source: "The World Bank Group Organization",
+        apiDoc: "https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information",
         url: "https://data.worldbank.org/indicator/AG.LND.FRST.K2?locations=PE&view=chart",
         about: "This graph shows information about terrestrial and marine protected areas in Peru, in % of total territorial area , per year. Data from World Database on Protected Areas ( WDPA ) where the compilation and management is carried out by United Nations Environment World Conservation Monitoring Centre ( UNEP-WCMC ) in collaboration with governments, non-governmental organizations, academia and industry. The data is available online through the Protected Planet website ( protectedplanet.net ).",
     });
@@ -1052,6 +1071,7 @@ async function AveragePrecipitationInDepth(setDescription, newOptions) {
 
     setDescription({
         source: "The World Bank Group Organization",
+        apiDoc: "https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information",
         url: "https://data.worldbank.org/indicator/AG.LND.PRCP.MM?locations=PE&view=chart",
         about: "This graph shows information about Average precipitation in depth in mm per year, in Peru. Data from Food and Agriculture Organization, electronic files and web site.",
     });
@@ -1141,6 +1161,7 @@ async function EnergyUseKgOilPerCapita(setDescription, newOptions) {
 
     setDescription({
         source: "The World Bank Group Organization",
+        apiDoc: "https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information",
         url: "https://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE?locations=PE&view=chart",
         about: "This graph shows information about energy use (kg of oil equivalent per capita) in Peru. Data from IEA Statistics © OECD/IEA 2014 ( iea.org/stats/index.asp ), subject to iea.org/t&c/termsandconditions",
     });
@@ -1232,6 +1253,7 @@ async function AirPollutionAnnualExposure(setDescription, newOptions) {
 
     setDescription({
         source: "The World Bank Group Organization",
+        apiDoc: "https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information",
         url: "https://data.worldbank.org/indicator/EN.ATM.PM25.MC.M3?locations=PE&view=chart",
         about: "This graph shows information about mean annual exposure (micrograms per cubic meter) of PM2.5 Air Pollution in Peru. Data from Brauer, M. et al. 2017, for the Global Burden of Disease Study 2017.",
     });
@@ -1320,6 +1342,7 @@ async function AirPollutionExposedPopulation(setDescription, newOptions) {
 
     setDescription({
         source: "The World Bank Group Organization",
+        apiDoc: "https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information",
         url: "https://data.worldbank.org/indicator/EN.ATM.PM25.MC.ZS?locations=PE&view=chart",
         about: "This graph shows information about Population exposed to levels of PM2.5 Air Pollution exceeding WHO guideline value (% of total) in Peru. Data from Brauer, M. et al. 2017, for the Global Burden of Disease Study 2017.",
     });
@@ -1399,6 +1422,89 @@ async function AirPollutionExposedPopulation(setDescription, newOptions) {
         name: 'PM2.5 air pollution, population exposed to levels exceeding WHO guideline value (% of total)',
         data: data_tmp,
         type: 'line'
+    });
+
+    return newOptions;
+}
+
+async function TotalNaturalResourcesRents(setDescription, newOptions) {
+
+    setDescription({
+        source: "The World Bank Group Organization",
+        apiDoc: "https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information",
+        url: "https://data.worldbank.org/indicator/NY.GDP.TOTL.RT.ZS?locations=PE&view=chart",
+        about: `This graph shows information about Total natural resources rents (% of GDP) in Peru. Data from Estimates based on sources and methods described in "The Changing Wealth of Nations: Measuring Sustainable Development in the New Millennium" ( World Bank, 2011 ).`,
+    });
+
+    newOptions = {
+        title: {
+            text: "Total natural resources rents [Perú]",
+            subtext: "% of GDP",
+            textStyle: {
+                color: "black",
+                fontSize: 14,
+            },
+            left: 0,
+            top: 0,
+        },
+        grid: { top: 75, right: 10, bottom: '20%', left: 25 },
+        legend: {
+            show: true,
+            bottom: 0,
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: { readOnly: false },
+                magicType: { type: ['line', 'bar'] },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            show: true,
+            type: 'category',
+            data: ['1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979', '1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'],
+            offset: 10
+        },
+        yAxis: [
+            {
+                show: true,
+                type: 'value',
+                name: '%',
+                axisLabel: {
+                    formatter: value => (value).toFixed(0),
+                    align: 'left',
+                },
+                offset: 10
+            }
+        ],
+        series: [],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: "shadow"
+            }
+        },
+        color: '#B2ABBF',
+    };
+
+    let url = [
+        `https://api.worldbank.org/v2/country/per/indicator/NY.GDP.TOTL.RT.ZS?format=json`,
+    ];
+
+    const { data } = await axios.get(url[0]);
+
+    let data_tmp = [];
+
+    for (let i = (data[1].length - 1); i >= 0; i--) {
+        // if (data[1][i].value !== null)
+        data_tmp.push(data[1][i].value?.toFixed(2));
+    }
+    newOptions.series.push({
+        name: 'PM2.5 air pollution, population exposed to levels exceeding WHO guideline value (% of total)',
+        data: data_tmp,
+        type: 'bar'
     });
 
     return newOptions;
