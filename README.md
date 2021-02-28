@@ -67,7 +67,7 @@ SOFTWARE.
 
 ## ¿Qué es?
 
-Eco Stats Perú es un sitio web que tiene como objetivo mostrar datos que concienticen sobre cómo los peruanos estamos influyendo en nuestro entorno, cómo impactamos sus recursos y cómo influimos en el cambio climático, basado en datos abiertos.
+Eco Stats Perú es un sitio web que tiene como objetivo listar soluciones y mostrar datos que concienticen sobre cómo los peruanos estamos influyendo en nuestro entorno, cómo impactamos sus recursos y cómo influimos en el cambio climático, basado en datos abiertos.
 
 ## Empezando
 
