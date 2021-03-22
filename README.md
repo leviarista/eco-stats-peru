@@ -2,6 +2,8 @@
 
 <sup>[english](#english) - [spanish](#español)</sup>
 
+> _This project was awarded as winner of the [New Relic Hack the Planet Contest](https://www.therelicans.com/therelicans/hack-the-planet-contest-winners-announced-22po)._ 😄
+
 <a name="english"></a>
 ## What is it?
 
@@ -17,18 +19,18 @@ After dependencies installed, you can run:
 
 `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
+The page will reload if you make edits.
 You will also see any lint errors in the console.
 
 `npm run build`
 
-Builds the app for production to the `build` folder.\
+Builds the app for production to the `build` folder.  
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
+The build is minified and the filenames include the hashes.
 
 App is ready!
 
@@ -76,24 +78,25 @@ Clona el repositorio.
 Instala las dependencias con `npm install`.
 
 Después de instalar las dependencias, se puede ejecutar:
-### `npm start`
 
-Ejecuta la aplicación en modo de desarrollo.\
+`npm start`
+
+Ejecuta la aplicación en modo de desarrollo.
 Abre [http://localhost:3000](http://localhost:3000) para verlo en el navegador.
 
-La página se volverá a cargar si realiza modificaciones.\
-También verá errores de pelusa en la consola.
+La página se volverá a cargar si realiza modificaciones.
+También verás cualquier error en la consola.
 
-### `npm ejecutar compilación`
+`npm run build`
 
-Construye la aplicación para producción en la carpeta `build`.\
-Agrupa correctamente React en el modo de producción y optimiza la compilación para obtener el mejor rendimiento.
+Construye la aplicación para producción en la carpeta `build`.  
+Agrupa correctamente React en el modo de producción y optimiza la compilación para obtener el mejor rendimiento.  
 
-La compilación es minimizada y los nombres de archivo incluyen los hash.\
+La compilación es minimizada y los nombres de archivo incluyen los hash.
 
 ¡La aplicación está lista!
 
-Para obtener más información consulte la sección sobre [implementación](https://facebook.github.io/create-react-app/docs/deployment).
+Para obtener más información consulte la sección sobre [despliegue](https://facebook.github.io/create-react-app/docs/deployment).
 
 ## Licencia
 
